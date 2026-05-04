@@ -9,6 +9,7 @@ import org.springframework.samples.petclinic.customer.dto.PetRequest;
 import org.springframework.samples.petclinic.customer.exception.OwnerNotFoundException;
 import org.springframework.samples.petclinic.customer.exception.PetNotFoundException;
 import org.springframework.samples.petclinic.customer.exception.PetStatusException;
+import org.springframework.samples.petclinic.customer.messaging.PetEventPublisher;
 import org.springframework.samples.petclinic.customer.repository.OwnerRepository;
 import org.springframework.samples.petclinic.customer.repository.PetRepository;
 import org.springframework.samples.petclinic.customer.repository.PetTypeRepository;
@@ -22,6 +23,7 @@ public class CustomerService {
     private final OwnerRepository ownerRepository;
     private final PetRepository petRepository;
     private final PetTypeRepository petTypeRepository;
+    private final PetEventPublisher petEventPublisher;
 
     @Transactional(readOnly = true)
     public Owner findOwnerById(Long ownerId) {
@@ -58,6 +60,8 @@ public class CustomerService {
         }
 
         pet.setStatus(PetStatus.INACTIVE);
-        return petRepository.save(pet);
+        Pet saved = petRepository.save(pet);
+        petEventPublisher.publishPetDeactivatedEvent(petId);
+        return saved;
     }
 }
