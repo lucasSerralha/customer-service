@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.customer.domain.Owner;
 import org.springframework.samples.petclinic.customer.domain.Pet;
+import org.springframework.samples.petclinic.customer.dto.OwnerRequest;
 import org.springframework.samples.petclinic.customer.dto.OwnerResponse;
 import org.springframework.samples.petclinic.customer.dto.PetRequest;
 import org.springframework.samples.petclinic.customer.dto.PetSummary;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api/owners")
@@ -26,6 +30,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class OwnerController {
 
     private final CustomerService customerService;
+
+    @PostMapping
+    @Operation(summary = "Create a new owner")
+    public ResponseEntity<OwnerResponse> createOwner(@Valid @RequestBody OwnerRequest ownerRequest) {
+        Owner owner = customerService.createOwner(ownerRequest);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{ownerId}")
+                .buildAndExpand(owner.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(OwnerResponse.from(owner));
+    }
 
     @GetMapping("/{ownerId}")
     @Operation(summary = "Get owner by ID including their pets")

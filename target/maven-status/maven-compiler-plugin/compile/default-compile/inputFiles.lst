@@ -20,3 +20,4 @@
 /home/lucas/ASID/customer-service/src/main/java/org/springframework/samples/petclinic/customer/domain/PetStatus.java
 /home/lucas/ASID/customer-service/src/main/java/org/springframework/samples/petclinic/customer/controller/GlobalExceptionHandler.java
 /home/lucas/ASID/customer-service/src/main/java/org/springframework/samples/petclinic/customer/repository/OwnerRepository.java
+/home/lucas/ASID/customer-service/src/main/java/org/springframework/samples/petclinic/customer/dto/OwnerRequest.java

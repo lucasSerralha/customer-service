@@ -5,6 +5,7 @@ import org.springframework.samples.petclinic.customer.domain.Owner;
 import org.springframework.samples.petclinic.customer.domain.Pet;
 import org.springframework.samples.petclinic.customer.domain.PetStatus;
 import org.springframework.samples.petclinic.customer.domain.PetType;
+import org.springframework.samples.petclinic.customer.dto.OwnerRequest;
 import org.springframework.samples.petclinic.customer.dto.PetRequest;
 import org.springframework.samples.petclinic.customer.exception.OwnerNotFoundException;
 import org.springframework.samples.petclinic.customer.exception.PetNotFoundException;
@@ -24,6 +25,11 @@ public class CustomerService {
     private final PetRepository petRepository;
     private final PetTypeRepository petTypeRepository;
     private final PetEventPublisher petEventPublisher;
+
+    @Transactional
+    public Owner createOwner(OwnerRequest request) {
+        return ownerRepository.save(request.toEntity());
+    }
 
     @Transactional(readOnly = true)
     public Owner findOwnerById(Long ownerId) {

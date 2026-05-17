@@ -17,6 +17,7 @@ org/springframework/samples/petclinic/customer/controller/OwnerController.class
 org/springframework/samples/petclinic/customer/CustomerServiceApplication.class
 org/springframework/samples/petclinic/customer/domain/PetType$PetTypeBuilder.class
 org/springframework/samples/petclinic/customer/domain/Owner.class
+org/springframework/samples/petclinic/customer/dto/OwnerRequest.class
 org/springframework/samples/petclinic/customer/exception/PetStatusException.class
 org/springframework/samples/petclinic/customer/controller/GlobalExceptionHandler.class
 org/springframework/samples/petclinic/customer/messaging/PetDeactivatedEvent.class

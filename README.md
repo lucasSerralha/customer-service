@@ -55,6 +55,8 @@ Use the Maven Wrapper to build and start the Spring Boot application locally:
 ```
 The service will start and automatically connect to the local RabbitMQ instance and the H2 in-memory database.
 
+*Note: While the service runs locally on port 8080, in the full architectural setup, all external traffic should be routed through the API Gateway (port 8000).*
+
 ### 3. Access API Documentation
 Once running, you can explore, test the endpoints, and view the OpenAPI contract via the Swagger UI:
 * **Swagger UI:** `http://localhost:8080/swagger-ui.html`
